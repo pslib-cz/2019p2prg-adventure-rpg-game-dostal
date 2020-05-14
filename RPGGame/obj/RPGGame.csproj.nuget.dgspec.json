@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "B:\\sd\\Studium\\PRG\\Dočasné ukládání souborů PRG\\RPGGame\\RPGGame.csproj": {}
+    "B:\\sd\\Studium\\PRG\\Dočasné ukládání souborů PRG\\2019p2prg-adventure-rpg-game-dostal\\RPGGame\\RPGGame.csproj": {}
   },
   "projects": {
-    "B:\\sd\\Studium\\PRG\\Dočasné ukládání souborů PRG\\RPGGame\\RPGGame.csproj": {
+    "B:\\sd\\Studium\\PRG\\Dočasné ukládání souborů PRG\\2019p2prg-adventure-rpg-game-dostal\\RPGGame\\RPGGame.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "B:\\sd\\Studium\\PRG\\Dočasné ukládání souborů PRG\\RPGGame\\RPGGame.csproj",
+        "projectUniqueName": "B:\\sd\\Studium\\PRG\\Dočasné ukládání souborů PRG\\2019p2prg-adventure-rpg-game-dostal\\RPGGame\\RPGGame.csproj",
         "projectName": "RPGGame",
-        "projectPath": "B:\\sd\\Studium\\PRG\\Dočasné ukládání souborů PRG\\RPGGame\\RPGGame.csproj",
+        "projectPath": "B:\\sd\\Studium\\PRG\\Dočasné ukládání souborů PRG\\2019p2prg-adventure-rpg-game-dostal\\RPGGame\\RPGGame.csproj",
         "packagesPath": "C:\\Users\\venad\\.nuget\\packages\\",
-        "outputPath": "B:\\sd\\Studium\\PRG\\Dočasné ukládání souborů PRG\\RPGGame\\obj\\",
+        "outputPath": "B:\\sd\\Studium\\PRG\\Dočasné ukládání souborů PRG\\2019p2prg-adventure-rpg-game-dostal\\RPGGame\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -40,6 +40,12 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "dependencies": {
+            "Microsoft.AspNetCore.Session": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -58,7 +64,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.202\\RuntimeIdentifierGraph.json"
         }
       }
     }
