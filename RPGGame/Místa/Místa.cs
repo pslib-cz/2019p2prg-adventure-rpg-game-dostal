@@ -8,5 +8,6 @@ namespace RPGGame.Místa
     public class Místa
     {
         public string Popis { get; set; }
+
     }
 }
