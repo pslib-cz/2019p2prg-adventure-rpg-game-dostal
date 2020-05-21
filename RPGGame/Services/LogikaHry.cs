@@ -7,5 +7,6 @@ namespace RPGGame.Services
 {
     public class LogikaHry
     {
+       
     }
 }

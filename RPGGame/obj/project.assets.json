@@ -1033,11 +1033,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "B:\\sd\\Studium\\PRG\\Dočasné ukládání souborů PRG\\2019p2prg-adventure-rpg-game-dostal\\RPGGame\\RPGGame.csproj",
+      "projectUniqueName": "B:\\sd\\Studium\\PRG\\Dočasné ukládání\\2019p2prg-adventure-rpg-game-dostal\\RPGGame\\RPGGame.csproj",
       "projectName": "RPGGame",
-      "projectPath": "B:\\sd\\Studium\\PRG\\Dočasné ukládání souborů PRG\\2019p2prg-adventure-rpg-game-dostal\\RPGGame\\RPGGame.csproj",
+      "projectPath": "B:\\sd\\Studium\\PRG\\Dočasné ukládání\\2019p2prg-adventure-rpg-game-dostal\\RPGGame\\RPGGame.csproj",
       "packagesPath": "C:\\Users\\venad\\.nuget\\packages\\",
-      "outputPath": "B:\\sd\\Studium\\PRG\\Dočasné ukládání souborů PRG\\2019p2prg-adventure-rpg-game-dostal\\RPGGame\\obj\\",
+      "outputPath": "B:\\sd\\Studium\\PRG\\Dočasné ukládání\\2019p2prg-adventure-rpg-game-dostal\\RPGGame\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -1082,6 +1082,12 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[3.1.2, 3.1.2]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -1090,7 +1096,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.300\\RuntimeIdentifierGraph.json"
       }
     }
   }

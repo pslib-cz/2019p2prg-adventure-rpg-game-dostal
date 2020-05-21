@@ -10,7 +10,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RPGGame.Services;
-using RPGGame.Story;
 
 namespace RPGGame
 {
@@ -31,9 +30,9 @@ namespace RPGGame
 
             services.AddSingleton<Random>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddSingleton<PribehHry>();
+            services.AddTransient<GameStory>();
 
-            services.AddScoped<LogikaHry>();
+            services.AddSingleton<LogikaHry>();
             services.AddTransient<SessionStorage>();
 
             services.AddRazorPages();
