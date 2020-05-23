@@ -13,6 +13,5 @@ namespace RPGGame.Model
 
         public int MeleeFightingSkill { get; private set; }
 
-        public int Persuasion { get; private set; }
     }
 }

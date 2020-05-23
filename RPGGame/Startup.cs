@@ -32,7 +32,7 @@ namespace RPGGame
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<GameStory>();
 
-            services.AddSingleton<LogikaHry>();
+            services.AddScoped<GameLogic>();
             services.AddTransient<SessionStorage>();
 
             services.AddRazorPages();

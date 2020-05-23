@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
+using RPGGame.Helpers;
+using RPGGame.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,46 +8,40 @@ using System.Threading.Tasks;
 
 namespace RPGGame.Services
 {
-    public class SessionStorage<T>
+    public class SessionStorage
     {
         readonly ISession _session;
-        const string CHARACTERNAME = "JmenoPostavy";
+        const string BOSSSTATS = "N.STATS";
+        const string PLAYERSTATS = "P.STATS";
+        const string LOCATION = "LOCATIONID";
 
-        private string _characterName;
+        public Player PlayerStats { get; set; }
+        public Boss BossStats { get; set; }
 
-        public bool IsSetName { get; }
+        public int? LocationID { get; set; }
 
         public SessionStorage(IHttpContextAccessor hca)
         {
             _session = hca.HttpContext.Session;
-
-            string jmeno = _session.GetString(CHARACTERNAME);
-            if (jmeno != default)
-            {
-                _characterName = jmeno;
-                IsSetName = true;
-            }
-            else
-            {
-                IsSetName = false;
-            }
+            PlayerStats = _session.Get<Player>(PLAYERSTATS);
+            BossStats = _session.Get<Boss>(BOSSSTATS);
+            LocationID = _session.GetInt32(LOCATION);
         }
 
-      
-        private void SetNameOfCharacter (string data)
+        public void SetRoomID (int numberOfLocation)
         {
-            _session.SetString(CHARACTERNAME, data);
-            _characterName = data;
+            _session.SetInt32(LOCATION, numberOfLocation);
         }
 
-        private void ClearNameOfCharacter ()
+        public void SavePlayerStats (Player stats)
         {
-            _session.SetString(CHARACTERNAME, null);
+            _session.Set(PLAYERSTATS, stats);
         }
 
-        public string GetCharacterName ()
+        public void SaveBossStats (Boss stats)
         {
-            return _characterName;
+            _session.Set(BOSSSTATS, stats);
         }
+       
     }
 }
