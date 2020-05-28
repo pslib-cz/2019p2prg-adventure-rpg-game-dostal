@@ -4,7 +4,34 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+    <div class="text-center">
+        <h1 class="display-4">Hra ze Star Wars</h1>
+        <form asp-action="create-post">
+            <div class="form-group row">
+                <label asp-for="CharacterName" class="col-sm-2 col-form-label">Jméno postavy</label>
+                <div class="col-sm-10">
+                    <input asp-for="CharacterName" type="text" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <button type="submit" formmethod="post" name="Zahaj hru"  class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+
+        @if (Model.IsNextLocation == true)
+        {
+            <h2>@Model.CurrentLocation.NameOfPlace</h2>
+            <p>@Model.CurrentLocation.DescriptionOfPlace</p>
+            @if (Model.CurrentPaths.Count == 0)
+            {
+                <p></p>
+            }
+            else
+            {
+                for (int d = 0; d < Model.CurrentPaths.Count; d++)
+                {
+                    <input asp-for="CurrentChoice" formmethod="get" type="radio" value="@Model.CurrentPaths[d].PathID" name="@Model.CurrentPaths[d].DescriptionOfChoice" />
+                }
+            }
+        }
+    </div>

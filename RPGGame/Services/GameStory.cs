@@ -58,8 +58,8 @@ namespace RPGGame.Services
                     Name = "Rytíř jedi Kao Bora",
                     Health = 40,
                     Endurance = 6,
-                    AttackStrength = 4,
-                    SpeedOfAttack = 1.5,
+                    AttackStrength = 2,
+                    SpeedOfAttack = 2,
                     Toughtness = 2
                 },
                 DescriptionOfPlace = "Dorazil si do chrámu, kde se setkáš s mistrem Jedi, ten ti řekne, že buďto s ním budeš bojovat, anebo se vydáš do prastaré jeskyně.",
@@ -79,7 +79,7 @@ namespace RPGGame.Services
                     " Není žádná vášeň, je jen klid. Není žádný chaos, je jen harmonie. Není žádná smrt, je jen síla.", NextLocationID = 11},
                     new Path() { PathID = 10, DescriptionOfChoice = "Není trpělivost, je pouze boj. Není slitování, je pouze smrt.", NextLocationID = 8 }
                     }
-                });
+            });
 
             locations.Add(new Location()
             {
@@ -102,8 +102,8 @@ namespace RPGGame.Services
                     Name = "Terentatek",
                     Health = 70,
                     Endurance = 8,
-                    AttackStrength = 6,
-                    SpeedOfAttack = 0.5,
+                    AttackStrength = 5,
+                    SpeedOfAttack = 2.5,
                     Toughtness = 1
                 },
                 DescriptionOfPlace = "Dorazil jsi do této hrobky, zahlédneš uprostřed sithský holokron a velkou bestii Terentatek, která se na tebe žene, co uděláš.",
@@ -140,7 +140,7 @@ namespace RPGGame.Services
                 DescriptionOfPlace = "Dorazil si do archivů v chrámu, našel si vodítko v záznamech ve formě hádanky a ta zní: 'Je tam, kde spočívá velkolepost jediů'",
                 Paths = new List<Path>(){
                     new Path() {PathID = 18, DescriptionOfChoice = "Vstup do Forge je u hory s vodopádem a spící banthou.", NextLocationID = 11},
-                    new Path() {PathID = 19, DescriptionOfChoice="Vstup do Forge je u propasti, ze které srší temnota.", NextLocationID = gameover }
+                    new Path() {PathID = 19, DescriptionOfChoice="Vstup do Forge je u propasti, ze které srší temnota.", NextLocationID = 0 }
                 }
             });
 
@@ -151,9 +151,9 @@ namespace RPGGame.Services
                 DescriptionOfPlace = "Dorazil si do svatyně, jejíž lokaci jsi získal, před sebou vidíš pradávný superpočítač, chce po tobě, abys mu řekl kodex sithů",
                 Paths = new List<Path>(){
                     new Path() {PathID = 20, DescriptionOfChoice = "Klid je jen klam, je pouze vášeň. Díky vášni získám sílu. Prostřednictvím síly získám moc. Díky moci dosáhnu vítězství." +
-                    " Vítězstvím jsou má pouta zlomena. Síla mě osvobodí.", NextLocationID = 12}, 
-                    new Path() {PathID = 21, DescriptionOfChoice="Když nebudu mocný, získám vítězství v mém neúspěchu a osvobodím se.", NextLocationID = fight},
-                    new Path() {PathID = 22, DescriptionOfChoice="Když nebudu mít vášeň, ostatní budou žít a síla mě osvobodí.", NextLocationID = fight}
+                    " Vítězstvím jsou má pouta zlomena. Síla mě osvobodí.", NextLocationID = 12},
+                    new Path() {PathID = 21, DescriptionOfChoice="Když nebudu mocný, získám vítězství v mém neúspěchu a osvobodím se.", NextLocationID = 12},
+                    new Path() {PathID = 22, DescriptionOfChoice="Když nebudu mít vášeň, ostatní budou žít a síla mě osvobodí.", NextLocationID = 12}
 
                 }
             });
@@ -166,7 +166,7 @@ namespace RPGGame.Services
                 " Pro vstup chce, abys mu řekl, co je vlastně pravá úloha jediů",
                 Paths = new List<Path>(){
                     new Path() {PathID = 23, DescriptionOfChoice="Úlohou je být ochráncem míru a zachovat rovnováhu.", NextLocationID = 13},
-                    new Path() {PathID = 24, DescriptionOfChoice="Úlohou je být válečníkem a zasahovat do záležitostí republiky", NextLocationID = gameover}
+                    new Path() {PathID = 24, DescriptionOfChoice="Úlohou je být válečníkem a zasahovat do záležitostí republiky", NextLocationID = 0}
 
                 }
             });
@@ -214,7 +214,7 @@ namespace RPGGame.Services
                 DescriptionOfPlace = "Po návratu s novým světelným mečem za sithským instruktorem ti řekne, že finální test je, abys ho porazil nebo zemřel, co uděláš?",
                 Paths = new List<Path>(){
                     new Path() {PathID = 31, DescriptionOfChoice = "Začít souboj"},
-                    new Path() {PathID = 32, DescriptionOfChoice="Vzdát se", NextLocationID = gameover}
+                    new Path() {PathID = 32, DescriptionOfChoice="Vzdát se", NextLocationID = 0}
                 }
             });
 
@@ -234,7 +234,7 @@ namespace RPGGame.Services
                 DescriptionOfPlace = "Po návratu z Forge do chrámu vidíš chrám v obležení Flesh raiderů s padlým jediem, co uděláš?",
                 Paths = new List<Path>(){
                     new Path() {PathID = 33, DescriptionOfChoice = "Začít souboj"},
-                    new Path() {PathID = 34, DescriptionOfChoice="Vzdát se", NextLocationID = gameover}
+                    new Path() {PathID = 34, DescriptionOfChoice="Vzdát se", NextLocationID = 0}
                 }
             });
 
@@ -245,7 +245,7 @@ namespace RPGGame.Services
                 DescriptionOfPlace = "Po úspěšné obraně chrámu si byl transportován na flotilu, jako odvetu plánuje republika útok na hlavní planetu sithského impéria, Dromund Kass," +
                 " jenže po chvilce se spustí alarm, že imperiální špión vyřadil kyslíkový systém, co uděláš?",
                 Paths = new List<Path>(){
-                    new Path() {PathID = 35, DescriptionOfChoice="Všechny kabely prostě ledabyle spojíš dohromady", NextLocationID = gameover},
+                    new Path() {PathID = 35, DescriptionOfChoice="Všechny kabely prostě ledabyle spojíš dohromady", NextLocationID = 0},
                     new Path() {PathID = 36, DescriptionOfChoice="Pomocí síly přepojíš kabely systému kyslíku", NextLocationID = 18}
                 }
             });
@@ -258,7 +258,7 @@ namespace RPGGame.Services
                " jenže po chvilce se spustí alarm, že republikový špión poškodil motory flotily, co uděláš?",
                 Paths = new List<Path>(){
                     new Path() {PathID = 37, DescriptionOfChoice="Použiješ tlakové ventily pro dolet na Tython", NextLocationID = 19},
-                    new Path() {PathID = 38, DescriptionOfChoice="Použiješ sílu k jednorázovému skoku do hyperprostoru s poškozenými motory", NextLocationID = gameover}
+                    new Path() {PathID = 38, DescriptionOfChoice="Použiješ sílu k jednorázovému skoku do hyperprostoru s poškozenými motory", NextLocationID = 0}
                 }
             });
 
@@ -268,8 +268,17 @@ namespace RPGGame.Services
                 NameOfPlace = "Dromund Kass",
                 DescriptionOfPlace = "Po úspěšné záchraně flotily jste se vylodili na planetě Dromund Kass, na celé planetě probíhají boje a všude létají střely z blasterů," +
                 " ty se vydáváš do sithského chrámu, kde nacházíš imperátora, Dartha Malguse, co uděláš?",
+                Enemy = new Boss()
+                {
+                    Name = "Darth Malgus",
+                    Health = 450,
+                    Endurance = 18,
+                    AttackStrength = 4,
+                    SpeedOfAttack = 6,
+                    Toughtness = 3
+                },
                 Paths = new List<Path>(){
-                    new Path() {PathID = 39, DescriptionOfChoice="Vzdát se.", NextLocationID = gameover},
+                    new Path() {PathID = 39, DescriptionOfChoice="Vzdát se.", NextLocationID = 0},
                     new Path() {PathID = 40, DescriptionOfChoice="Zahájit souboj."}
                 }
             });
@@ -280,10 +289,33 @@ namespace RPGGame.Services
                 NameOfPlace = "Výsadek na Tython",
                 DescriptionOfPlace = "Po úspěšné záchraně flotily jste se vylodili na planetě Tython, na celé planetě probíhají boje a všude létají střely z blasterů," +
                " ty se vydáváš do jediského chrámu, kde nacházíš velmistra řádu, Satele Shan, co uděláš?",
+                Enemy = new Boss()
+                {
+                    Name = "Padlý jedi Bengel Morr",
+                    Health = 450,
+                    Endurance = 12,
+                    AttackStrength = 3,
+                    SpeedOfAttack = 9,
+                    Toughtness = 3
+                },
                 Paths = new List<Path>(){
                     new Path() {PathID = 41, DescriptionOfChoice="Zahájit souboj."},
-                    new Path() {PathID = 42, DescriptionOfChoice="Vzdát se.", NextLocationID = gameover}
+                    new Path() {PathID = 42, DescriptionOfChoice="Vzdát se.", NextLocationID = 0}
                 }
+            });
+
+            locations.Add(new Location()
+            {
+                ID = 0,
+                NameOfPlace = "Konec hry",
+                DescriptionOfPlace = "Hra skončila, prohrál jsi",
+            });
+
+            locations.Add(new Location()
+            {
+                ID = 20,
+                NameOfPlace = "Konec hry",
+                DescriptionOfPlace = "Hra skončila, vyhrál jsi",
             });
         }
     }

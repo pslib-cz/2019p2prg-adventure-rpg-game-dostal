@@ -19,13 +19,17 @@ namespace RPGGame.Services
         public Boss BossStats { get; set; }
 
         public int? LocationID { get; set; }
-
+        
         public SessionStorage(IHttpContextAccessor hca)
         {
             _session = hca.HttpContext.Session;
             PlayerStats = _session.Get<Player>(PLAYERSTATS);
             BossStats = _session.Get<Boss>(BOSSSTATS);
-            LocationID = _session.GetInt32(LOCATION);
+        }
+
+        public int? GetRoomId ()
+        {
+            return _session.GetInt32(LOCATION);
         }
 
         public void SetRoomID (int numberOfLocation)
@@ -36,11 +40,6 @@ namespace RPGGame.Services
         public void SavePlayerStats (Player stats)
         {
             _session.Set(PLAYERSTATS, stats);
-        }
-
-        public void SaveBossStats (Boss stats)
-        {
-            _session.Set(BOSSSTATS, stats);
         }
        
     }
