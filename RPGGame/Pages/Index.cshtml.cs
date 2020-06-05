@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -12,52 +13,59 @@ namespace RPGGame.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly SessionStorage _session;
+        private readonly SessionStorage<Player> _session;
 
         private readonly GameLogic _logic;
+
+        [BindProperty]
         public string CharacterName { get; set; }
+
+        [BindProperty]
+        public Player PlayerStats { get; set; }
 
         public Location CurrentLocation { get; set; }
 
         public List<Path> CurrentPaths { get; set; }
 
-        public bool IsNextLocation { get; set; }
+        public int CurrentLocationID { get; set; }
 
-        [BindProperty]
-        public int CurrentChoice {get; set;}
-
-        public int SelectedLocation { get; set; }
-
-        public IndexModel(SessionStorage session, GameLogic logic)
+        public IndexModel(SessionStorage<Player> session, GameLogic logic)
         {
             _session = session;
             _logic = logic;
         }
 
-        public void OnPost()
+        public void OnGetNameCharacter()
         {
-            _session.PlayerStats.Name = CharacterName;
-            _session.SavePlayerStats(_session.PlayerStats);
-            _logic.NextLocation = 0;
+            PlayerStats.Name = CharacterName;
+            _session.SavePlayerStats(PlayerStats);
 
-            do
-            {
-                _logic.NextLocation++;
-                _session.SetRoomID(_logic.NextLocation);
-                int? id = _session.GetRoomId();
-                CurrentLocation = _logic.GetLocation(id);
-                CurrentPaths = _logic.GetPaths(id);
-                IsNextLocation = true;
-                _logic.Play(SelectedLocation,id);   
-                _logic.IncreaseSkillPoints(id);
-            }
-            while (_logic.NextLocation == 0 || _logic.NextLocation == 20);
-            
+            _session.SetRoomID(_logic.NextLocation);
+            int? id = _session.GetRoomId();
+            CurrentLocation = _logic.GetLocation(id);
+            CurrentPaths = _logic.GetPaths(id);
+            CurrentLocationID = _logic.NextLocation;
         }
 
-        public void OnGet ()
+        public void OnGet(int userChoice)
         {
-            SelectedLocation = CurrentChoice;
+            int? id;
+
+            if (_logic.NextLocation == 1)
+            {
+                id = _session.GetRoomId();
+            }
+            else
+            {
+                _session.SetRoomID(_logic.NextLocation);
+                id = _session.GetRoomId();
+                CurrentLocation = _logic.GetLocation(id);
+                CurrentPaths = _logic.GetPaths(id);
+            }
+
+            _logic.Play(userChoice, id);
+            _logic.IncreaseSkillPoints(userChoice);
+            CurrentLocationID = _logic.NextLocation;
         }
     }
 }

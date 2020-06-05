@@ -4,34 +4,33 @@
     ViewData["Title"] = "Home page";
 }
 
-    <div class="text-center">
-        <h1 class="display-4">Hra ze Star Wars</h1>
-        <form asp-action="create-post">
-            <div class="form-group row">
-                <label asp-for="CharacterName" class="col-sm-2 col-form-label">Jméno postavy</label>
-                <div class="col-sm-10">
-                    <input asp-for="CharacterName" type="text" class="form-control" />
-                </div>
-            </div>
-            <div class="form-group row">
-                <button type="submit" formmethod="post" name="Zahaj hru"  class="btn btn-primary">Submit</button>
-            </div>
-        </form>
+<div class="text-center">
+    <h1 class="display-4">Hra ze Star Wars</h1>
+    <form method="get" asp-page-handler="nameCharacter">
+        <h2>Jméno postavy</h2>
+        <input asp-for="CharacterName" type="text" value="@Model.PlayerStats.Name" />
+        <button class="btn btn-primary">Zahaj hru</button>
+    </form>
 
-        @if (Model.IsNextLocation == true)
+    @if (Model.CurrentLocationID == 1)
+    {
+        @do
         {
             <h2>@Model.CurrentLocation.NameOfPlace</h2>
             <p>@Model.CurrentLocation.DescriptionOfPlace</p>
             @if (Model.CurrentPaths.Count == 0)
             {
-                <p></p>
+                <p>Hra skončila, pokud chceš začít znovu, Zadej znovu jméno postavy a znovu zahaj hru.</p>
             }
             else
             {
                 for (int d = 0; d < Model.CurrentPaths.Count; d++)
                 {
-                    <input asp-for="CurrentChoice" formmethod="get" type="radio" value="@Model.CurrentPaths[d].PathID" name="@Model.CurrentPaths[d].DescriptionOfChoice" />
+                    <a asp-route-userChoice="@Model.CurrentPaths[d].PathID">@Model.CurrentPaths[d].DescriptionOfChoice</a>
                 }
             }
         }
-    </div>
+        while (Model.CurrentLocationID != 0 || Model.CurrentLocationID != 20);
+    }
+
+</div>

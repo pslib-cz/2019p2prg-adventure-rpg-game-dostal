@@ -17,6 +17,13 @@ namespace RPGGame.Services
 
             locations.Add(new Location()
             {
+                ID = 0,
+                NameOfPlace = "Konec hry",
+                DescriptionOfPlace = "Hra skončila, prohrál jsi",
+            });
+
+            locations.Add(new Location()
+            {
                 ID = 1,
                 NameOfPlace = "Atollon",
                 DescriptionOfPlace = "Jsi jedinec citlivý na sílu a máš u sebe vibromeč, nacházíš se na místní přístávací plošině na planětě Atollon, rozhoduješ se, jestli se přídáš k sithům či jediům.",
@@ -59,7 +66,7 @@ namespace RPGGame.Services
                     Health = 40,
                     Endurance = 6,
                     AttackStrength = 2,
-                    SpeedOfAttack = 2,
+                    SpeedOfAttack = 1,
                     Toughtness = 2
                 },
                 DescriptionOfPlace = "Dorazil si do chrámu, kde se setkáš s mistrem Jedi, ten ti řekne, že buďto s ním budeš bojovat, anebo se vydáš do prastaré jeskyně.",
@@ -100,8 +107,8 @@ namespace RPGGame.Services
                 Enemy = new Boss()
                 {
                     Name = "Terentatek",
-                    Health = 70,
-                    Endurance = 8,
+                    Health = 180,
+                    Endurance = 14,
                     AttackStrength = 5,
                     SpeedOfAttack = 2.5,
                     Toughtness = 1
@@ -120,11 +127,11 @@ namespace RPGGame.Services
                 Enemy = new Boss()
                 {
                     Name = "Náčelník Flesh raiderů",
-                    Health = 50,
-                    Endurance = 3,
+                    Health = 170,
+                    Endurance = 12,
                     AttackStrength = 2,
-                    SpeedOfAttack = 6,
-                    Toughtness = 2
+                    SpeedOfAttack = 15,
+                    Toughtness = 1
                 },
                 DescriptionOfPlace = "Dorazil si do tábora vůdce, rozhodni se co uděláš.",
                 Paths = new List<Path>(){
@@ -152,8 +159,8 @@ namespace RPGGame.Services
                 Paths = new List<Path>(){
                     new Path() {PathID = 20, DescriptionOfChoice = "Klid je jen klam, je pouze vášeň. Díky vášni získám sílu. Prostřednictvím síly získám moc. Díky moci dosáhnu vítězství." +
                     " Vítězstvím jsou má pouta zlomena. Síla mě osvobodí.", NextLocationID = 12},
-                    new Path() {PathID = 21, DescriptionOfChoice="Když nebudu mocný, získám vítězství v mém neúspěchu a osvobodím se.", NextLocationID = 12},
-                    new Path() {PathID = 22, DescriptionOfChoice="Když nebudu mít vášeň, ostatní budou žít a síla mě osvobodí.", NextLocationID = 12}
+                    new Path() {PathID = 21, DescriptionOfChoice="Když nebudu mocný, získám vítězství v mém neúspěchu a osvobodím se.", NextLocationID = 0},
+                    new Path() {PathID = 22, DescriptionOfChoice="Když nebudu mít vášeň, ostatní budou žít a síla mě osvobodí.", NextLocationID = 0}
 
                 }
             });
@@ -191,9 +198,7 @@ namespace RPGGame.Services
                 " Po vystoupání nahoru vidíš na stolku součástky a kyber krystal pro sestrojení světelného meče, jaký si vyrobíš",
                 Paths = new List<Path>(){
                     new Path() {PathID = 27, DescriptionOfChoice="dvojitý modrý světelný meč", NextLocationID = 15},
-                    new Path() {PathID = 28, DescriptionOfChoice="dvojitý zelený světelný meč", NextLocationID = 15},
-                     new Path() {PathID = 29, DescriptionOfChoice="klasický modrý světelný meč", NextLocationID = 15},
-                      new Path() {PathID = 30, DescriptionOfChoice="klasický zelený světelný meč", NextLocationID = 15}
+                      new Path() {PathID = 28, DescriptionOfChoice="klasický modrý světelný meč", NextLocationID = 15}
                 }
             });
 
@@ -205,16 +210,16 @@ namespace RPGGame.Services
                 Enemy = new Boss()
                 {
                     Name = "Sithský instruktor Tremel",
-                    Health = 100,
-                    Endurance = 3,
-                    AttackStrength = 2,
-                    SpeedOfAttack = 6,
+                    Health = 200,
+                    Endurance = 48,
+                    AttackStrength = 15,
+                    SpeedOfAttack = 20,
                     Toughtness = 3
                 },
                 DescriptionOfPlace = "Po návratu s novým světelným mečem za sithským instruktorem ti řekne, že finální test je, abys ho porazil nebo zemřel, co uděláš?",
                 Paths = new List<Path>(){
-                    new Path() {PathID = 31, DescriptionOfChoice = "Začít souboj"},
-                    new Path() {PathID = 32, DescriptionOfChoice="Vzdát se", NextLocationID = 0}
+                    new Path() {PathID = 29, DescriptionOfChoice = "Začít souboj"},
+                    new Path() {PathID = 30, DescriptionOfChoice="Vzdát se", NextLocationID = 0}
                 }
             });
 
@@ -225,16 +230,16 @@ namespace RPGGame.Services
                 Enemy = new Boss()
                 {
                     Name = "Padlý jedi Bengel Morr",
-                    Health = 100,
-                    Endurance = 3,
-                    AttackStrength = 2,
-                    SpeedOfAttack = 6,
+                    Health = 200,
+                    Endurance = 24,
+                    AttackStrength = 9,
+                    SpeedOfAttack = 28,
                     Toughtness = 3
                 },
                 DescriptionOfPlace = "Po návratu z Forge do chrámu vidíš chrám v obležení Flesh raiderů s padlým jediem, co uděláš?",
                 Paths = new List<Path>(){
-                    new Path() {PathID = 33, DescriptionOfChoice = "Začít souboj"},
-                    new Path() {PathID = 34, DescriptionOfChoice="Vzdát se", NextLocationID = 0}
+                    new Path() {PathID = 31, DescriptionOfChoice = "Začít souboj"},
+                    new Path() {PathID = 32, DescriptionOfChoice="Vzdát se", NextLocationID = 0}
                 }
             });
 
@@ -245,8 +250,8 @@ namespace RPGGame.Services
                 DescriptionOfPlace = "Po úspěšné obraně chrámu si byl transportován na flotilu, jako odvetu plánuje republika útok na hlavní planetu sithského impéria, Dromund Kass," +
                 " jenže po chvilce se spustí alarm, že imperiální špión vyřadil kyslíkový systém, co uděláš?",
                 Paths = new List<Path>(){
-                    new Path() {PathID = 35, DescriptionOfChoice="Všechny kabely prostě ledabyle spojíš dohromady", NextLocationID = 0},
-                    new Path() {PathID = 36, DescriptionOfChoice="Pomocí síly přepojíš kabely systému kyslíku", NextLocationID = 18}
+                    new Path() {PathID = 33, DescriptionOfChoice="Všechny kabely prostě ledabyle spojíš dohromady", NextLocationID = 0},
+                    new Path() {PathID = 34, DescriptionOfChoice="Pomocí síly přepojíš kabely systému kyslíku", NextLocationID = 18}
                 }
             });
 
@@ -257,8 +262,8 @@ namespace RPGGame.Services
                 DescriptionOfPlace = "Po úspěšném zabití sithského instruktora si byl transportován na flotilu, plánuje se útok na planetu řádu Jedi, Tython," +
                " jenže po chvilce se spustí alarm, že republikový špión poškodil motory flotily, co uděláš?",
                 Paths = new List<Path>(){
-                    new Path() {PathID = 37, DescriptionOfChoice="Použiješ tlakové ventily pro dolet na Tython", NextLocationID = 19},
-                    new Path() {PathID = 38, DescriptionOfChoice="Použiješ sílu k jednorázovému skoku do hyperprostoru s poškozenými motory", NextLocationID = 0}
+                    new Path() {PathID = 35, DescriptionOfChoice="Použiješ tlakové ventily pro dolet na Tython", NextLocationID = 19},
+                    new Path() {PathID = 36, DescriptionOfChoice="Použiješ sílu k jednorázovému skoku do hyperprostoru s poškozenými motory", NextLocationID = 0}
                 }
             });
 
@@ -271,15 +276,15 @@ namespace RPGGame.Services
                 Enemy = new Boss()
                 {
                     Name = "Darth Malgus",
-                    Health = 450,
-                    Endurance = 18,
-                    AttackStrength = 4,
-                    SpeedOfAttack = 6,
+                    Health = 300,
+                    Endurance = 55,
+                    AttackStrength = 45,
+                    SpeedOfAttack = 35,
                     Toughtness = 3
                 },
                 Paths = new List<Path>(){
-                    new Path() {PathID = 39, DescriptionOfChoice="Vzdát se.", NextLocationID = 0},
-                    new Path() {PathID = 40, DescriptionOfChoice="Zahájit souboj."}
+                    new Path() {PathID = 37, DescriptionOfChoice="Vzdát se.", NextLocationID = 0},
+                    new Path() {PathID = 38, DescriptionOfChoice="Zahájit souboj."}
                 }
             });
 
@@ -291,24 +296,17 @@ namespace RPGGame.Services
                " ty se vydáváš do jediského chrámu, kde nacházíš velmistra řádu, Satele Shan, co uděláš?",
                 Enemy = new Boss()
                 {
-                    Name = "Padlý jedi Bengel Morr",
-                    Health = 450,
-                    Endurance = 12,
-                    AttackStrength = 3,
-                    SpeedOfAttack = 9,
+                    Name = "Satele Shan",
+                    Health = 300,
+                    Endurance = 50,
+                    AttackStrength = 40,
+                    SpeedOfAttack = 50,
                     Toughtness = 3
                 },
                 Paths = new List<Path>(){
-                    new Path() {PathID = 41, DescriptionOfChoice="Zahájit souboj."},
-                    new Path() {PathID = 42, DescriptionOfChoice="Vzdát se.", NextLocationID = 0}
+                    new Path() {PathID = 39, DescriptionOfChoice="Zahájit souboj."},
+                    new Path() {PathID = 40, DescriptionOfChoice="Vzdát se.", NextLocationID = 0}
                 }
-            });
-
-            locations.Add(new Location()
-            {
-                ID = 0,
-                NameOfPlace = "Konec hry",
-                DescriptionOfPlace = "Hra skončila, prohrál jsi",
             });
 
             locations.Add(new Location()

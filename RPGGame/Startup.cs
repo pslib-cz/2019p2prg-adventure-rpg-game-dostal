@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using RPGGame.Model;
 using RPGGame.Services;
 
 namespace RPGGame
@@ -33,7 +34,7 @@ namespace RPGGame
             services.AddTransient<GameStory>();
 
             services.AddScoped<GameLogic>();
-            services.AddTransient<SessionStorage>();
+            services.AddTransient<SessionStorage<Player>>();
 
             services.AddRazorPages();
         }
