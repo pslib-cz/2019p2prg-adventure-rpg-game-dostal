@@ -18,9 +18,11 @@
         {
             <h2>@Model.CurrentLocation.NameOfPlace</h2>
             <p>@Model.CurrentLocation.DescriptionOfPlace</p>
-            @if (Model.CurrentPaths.Count == 0)
+
+            if (Model.CurrentLocationID == 0 || Model.CurrentLocationID == 20)
             {
-                <p>Hra skončila, pokud chceš začít znovu, Zadej znovu jméno postavy a znovu zahaj hru.</p>
+                <p>Hra skončila, pokud chceš začít znovu, zadej zvovu jméno postavy a znovu zahaj hru.</p>
+                break;
             }
             else
             {
@@ -30,7 +32,7 @@
                 }
             }
         }
-        while (Model.CurrentLocationID != 0 || Model.CurrentLocationID != 20);
+        while (true);
     }
 
 </div>
