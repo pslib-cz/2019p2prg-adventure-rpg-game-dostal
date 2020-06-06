@@ -27,9 +27,7 @@ namespace RPGGame.Pages
 
         public List<Path> CurrentPaths { get; set; }
 
-        public int CurrentLocationID { get; set; }
-
-        public int? ID { get; set; }
+        public int? CurrentLocationID { get; set; }
 
         public IndexModel(SessionStorage<Player> session, GameLogic logic)
         {
@@ -46,21 +44,19 @@ namespace RPGGame.Pages
             int? id = _session.GetRoomId();
             CurrentLocation = _logic.GetLocation(id);
             CurrentPaths = _logic.GetPaths(id);
-            ID = id;
+            CurrentLocationID = id;
         }
 
         public void OnGet(int userChoice)
         {
-            _logic.Play(userChoice, ID);
+            _logic.Play(userChoice, CurrentLocationID);
             _logic.IncreaseSkillPoints(userChoice);
 
             _session.SetRoomID(_logic.NextLocation);
             int? id = _session.GetRoomId();
             CurrentLocation = _logic.GetLocation(id);
             CurrentPaths = _logic.GetPaths(id);
-
-            CurrentLocationID = _logic.NextLocation;
-            ID = id;
+            CurrentLocationID = id;
         }
     }
 }

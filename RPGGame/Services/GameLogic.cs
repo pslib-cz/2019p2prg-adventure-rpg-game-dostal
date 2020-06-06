@@ -89,6 +89,7 @@ namespace RPGGame.Services
             Player player = _session.PlayerStats;
             Boss npc = _story.locations[currentLocation.Value].Enemy;
             npc.Health *= npc.Toughtness;
+            double healthBefore = player.Health;
 
             do
             {
@@ -103,6 +104,8 @@ namespace RPGGame.Services
                 if (npc.Health <= 0)
                 {
                     StateOfGame = true;
+                    player.Health = healthBefore;
+                    _session.SavePlayerStats(player);
                     break;
                 }
 
@@ -114,6 +117,8 @@ namespace RPGGame.Services
                 }
 
                 player.Health -= npcAttackValue;
+
+                _session.SavePlayerStats(player);
 
                 if (player.Health <= 0)
                 {
