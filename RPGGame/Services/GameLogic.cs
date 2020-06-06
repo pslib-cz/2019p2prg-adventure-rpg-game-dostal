@@ -58,11 +58,15 @@ namespace RPGGame.Services
                 }
                 else if (StateOfGame == true && currentLocationId.Value == 18)
                 {
+                    _session.PlayerStats = default;
+                    _session.SavePlayerStats(_session.PlayerStats);
                     NextLocation = 20;
 
                 }
                 else if (StateOfGame == true && currentLocationId.Value == 19)
                 {
+                    _session.PlayerStats = default;
+                    _session.SavePlayerStats(_session.PlayerStats);
                     NextLocation = 20;
 
                 }
@@ -123,6 +127,8 @@ namespace RPGGame.Services
                 if (player.Health <= 0)
                 {
                     StateOfGame = false;
+                    player = default;
+                    _session.SavePlayerStats(player);
                     break;
                 }
             }
