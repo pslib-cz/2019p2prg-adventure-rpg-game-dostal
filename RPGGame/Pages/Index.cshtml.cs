@@ -57,6 +57,10 @@ namespace RPGGame.Pages
             CurrentLocation = _logic.GetLocation(id);
             CurrentPaths = _logic.GetPaths(id);
             CurrentLocationID = id;
+            if (_logic.NextLocation == 20 || _logic.NextLocation == 0)
+            {
+                _logic.NextLocation = default;
+            }
         }
     }
 }

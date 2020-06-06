@@ -14,9 +14,11 @@ namespace RPGGame.Services
 
         readonly GameStory _story;
 
+        private int nextLocation;
+
         public bool StateOfGame { get; set; }
 
-        public int NextLocation { get; set; } = 1;
+        public int NextLocation { get { return nextLocation; } set { if (nextLocation == default) { nextLocation = 1; } } }
 
         public GameLogic(SessionStorage<Player> ss, GameStory gs)
         {
