@@ -74,6 +74,8 @@ namespace RPGGame.Services
                 }
                 else if (StateOfGame == false)
                 {
+                    _session.PlayerStats = default;
+                    _session.SavePlayerStats(_session.PlayerStats);
                     NextLocation = 0;
                 }
             }
@@ -129,8 +131,6 @@ namespace RPGGame.Services
                 if (player.Health <= 0)
                 {
                     StateOfGame = false;
-                    player = default;
-                    _session.SavePlayerStats(player);
                     break;
                 }
             }
