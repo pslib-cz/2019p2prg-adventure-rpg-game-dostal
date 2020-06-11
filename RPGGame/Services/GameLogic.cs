@@ -14,143 +14,77 @@ namespace RPGGame.Services
 
         readonly GameStory _story;
 
-        private int nextLocation;
+        public int CurrentLocationId { get; set; } = 1;
 
-        public bool StateOfGame { get; set; }
+        public int CurrentSelectedChoice { get; set; }
 
-        public int NextLocation { get { return nextLocation; } set { if (nextLocation == default) { nextLocation = 1; } } }
+        public Player Player { get; set; }
+
+        public Location Location { get; set; }
+
+        public List<Path> Paths { get; set; }
 
         public GameLogic(SessionStorage<Player> ss, GameStory gs)
         {
             _session = ss;
             _story = gs;
+            Player = _session.PlayerStats;
+            if (Player == default) { Player = new Player(); }
         }
 
-        public void Play(int selectedChoice, int? currentLocationId)
+        public void Play()
         {
-
-            if (selectedChoice == 7 || selectedChoice == 14 || selectedChoice == 16 || selectedChoice == 29 ||
-                selectedChoice == 31 || selectedChoice == 38 || selectedChoice == 39)
+            if (CurrentLocationId == 1 && CurrentSelectedChoice == default)
             {
-                Fight(currentLocationId.Value);
-
-                if (StateOfGame == true && currentLocationId.Value == 4)
-                {
-                    NextLocation = 8;
-                }
-                else if (StateOfGame == true && currentLocationId.Value == 7)
-                {
-                    NextLocation = 10;
-
-                }
-                else if (StateOfGame == true && currentLocationId.Value == 8)
-                {
-                    NextLocation = 11;
-
-                }
-                else if (StateOfGame == true && currentLocationId.Value == 14)
-                {
-                    NextLocation = 17;
-
-                }
-                else if (StateOfGame == true && currentLocationId.Value == 15)
-                {
-                    NextLocation = 16;
-
-                }
-                else if (StateOfGame == true && currentLocationId.Value == 18)
-                {
-                    _session.PlayerStats = default;
-                    _session.SavePlayerStats(_session.PlayerStats);
-                    NextLocation = 20;
-
-                }
-                else if (StateOfGame == true && currentLocationId.Value == 19)
-                {
-                    _session.PlayerStats = default;
-                    _session.SavePlayerStats(_session.PlayerStats);
-                    NextLocation = 20;
-
-                }
-                else if (StateOfGame == false)
-                {
-                    _session.PlayerStats = default;
-                    _session.SavePlayerStats(_session.PlayerStats);
-                    NextLocation = 0;
-                }
+                IncreaseSkillPoints();
+                SetLocation();
             }
             else
             {
-                for (int b = 0; b < _story.locations[currentLocationId.Value].Paths.Count; b++)
+                if (CurrentLocationId == 1 && CurrentSelectedChoice != default)
                 {
-                    if (selectedChoice == _story.locations[currentLocationId.Value].Paths[b].PathID)
+                    int? ID = _session.GetRoomId();
+                    for (int b = 0; b < _story.locations[ID.Value].Paths.Count; b++)
                     {
-                        NextLocation = _story.locations[currentLocationId.Value].Paths[b].NextLocationID;
+                        if (_story.locations[ID.Value].Paths[b].PathID == CurrentSelectedChoice)
+                        {
+                            CurrentLocationId = _story.locations[ID.Value].Paths[b].NextLocationID;
+                        }
                     }
                 }
+                else
+                {
+                    _session.SetRoomID(CurrentLocationId);
+                    int? id = _session.GetRoomId();
+
+                    for (int b = 0; b < _story.locations[id.Value].Paths.Count; b++)
+                    {
+                        if (_story.locations[id.Value].Paths[b].PathID == CurrentSelectedChoice)
+                        {
+                            CurrentLocationId = _story.locations[id.Value].Paths[b].NextLocationID;
+                        }
+                    }
+                }
+
+                IncreaseSkillPoints();
+                SetLocation();
             }
         }
 
-        public void Fight(int? currentLocation)
-        {
-            Random randomAttackValue = new Random();
-            Player player = _session.PlayerStats;
-            Boss npc = _story.locations[currentLocation.Value].Enemy;
-            npc.Health *= npc.Toughtness;
-            double healthBefore = player.Health;
-
-            do
-            {
-                double playerAttackValue = player.MeleeFightingSkill * randomAttackValue.Next(1, 5) + player.SpeedOfAttack + player.AttackStrength + player.ForcePotential;
-                if (playerAttackValue < npc.Endurance)
-                {
-                    playerAttackValue = npc.Endurance - playerAttackValue;
-                }
-
-                npc.Health -= playerAttackValue;
-
-                if (npc.Health <= 0)
-                {
-                    StateOfGame = true;
-                    player.Health = healthBefore;
-                    _session.SavePlayerStats(player);
-                    break;
-                }
-
-                double npcAttackValue = npc.AttackStrength * randomAttackValue.Next(1, 9) + npc.SpeedOfAttack;
-
-                if (npcAttackValue < player.Endurance)
-                {
-                    npcAttackValue = player.Endurance - npcAttackValue;
-                }
-
-                player.Health -= npcAttackValue;
-
-                _session.SavePlayerStats(player);
-
-                if (player.Health <= 0)
-                {
-                    StateOfGame = false;
-                    break;
-                }
-            }
-            while (true);
-        }
-
-        public void IncreaseSkillPoints(int selectedChoice)
+        public void IncreaseSkillPoints()
         {
 
-            Player player = _session.PlayerStats;
+            Player player = Player;
             int levelBefore = player.Level;
 
-            if (selectedChoice == 1 || selectedChoice == 4 || selectedChoice == 6 || selectedChoice == 8 || selectedChoice == 9 || selectedChoice == 11 ||
-                selectedChoice == 12 || selectedChoice == 17 || selectedChoice == 18 || selectedChoice == 20 ||
-                selectedChoice == 23 || selectedChoice == 34 || selectedChoice == 35)
+            if (CurrentSelectedChoice == 1 || CurrentSelectedChoice == 4 || CurrentSelectedChoice == 6 || CurrentSelectedChoice == 9 || CurrentSelectedChoice == 11 ||
+                CurrentSelectedChoice == 12 || CurrentSelectedChoice == 17 || CurrentSelectedChoice == 18 || CurrentSelectedChoice == 20 ||
+                CurrentSelectedChoice == 23 || CurrentSelectedChoice == 34 || CurrentLocationId == 41)
             {
                 player.ForcePotential += 10;
                 player.Health += 60;
             }
-            else if (selectedChoice == 2 || selectedChoice == 3 || selectedChoice == 5 || selectedChoice == 10 || selectedChoice == 13 || selectedChoice == 15)
+            else if (CurrentSelectedChoice == 2 || CurrentSelectedChoice == 3 || CurrentSelectedChoice == 5 || CurrentSelectedChoice == 10 || CurrentSelectedChoice == 13 || CurrentSelectedChoice == 15)
             {
                 player.SpeedOfAttack += 5;
                 player.AttackStrength += 8;
@@ -158,7 +92,7 @@ namespace RPGGame.Services
                 player.Health += 45;
                 player.MeleeFightingSkill += 8;
             }
-            else if (selectedChoice == 25 || selectedChoice == 26 || selectedChoice == 27 || selectedChoice == 28 || selectedChoice == 38 || selectedChoice == 39)
+            else if ( CurrentSelectedChoice == 26 ||  CurrentSelectedChoice == 28 || CurrentSelectedChoice == 38)
             {
                 player.SpeedOfAttack += 50;
                 player.AttackStrength += 30;
@@ -167,7 +101,7 @@ namespace RPGGame.Services
                 player.ForcePotential += 20;
                 player.MeleeFightingSkill += 15;
             }
-            else
+            else if (CurrentSelectedChoice == 7 || CurrentSelectedChoice == 14 || CurrentSelectedChoice == 15 || CurrentSelectedChoice == 29 || CurrentSelectedChoice == 31 || CurrentSelectedChoice == 38)
             {
                 player.Endurance += 15;
                 player.MeleeFightingSkill += 10;
@@ -175,7 +109,11 @@ namespace RPGGame.Services
                 player.AttackStrength += 14;
             }
 
-            player.Level += 1;
+
+            if (CurrentLocationId != 20 || CurrentLocationId != 0)
+            {
+                player.Level += 1;
+            }
 
             if (levelBefore != player.Level)
             {
@@ -187,14 +125,12 @@ namespace RPGGame.Services
             _session.SavePlayerStats(player);
         }
 
-        public Location GetLocation(int? locationID)
+        public void SetLocation()
         {
-            return _story.locations[locationID.Value];
-        }
-
-        public List<Path> GetPaths(int? locationID)
-        {
-            return _story.locations[locationID.Value].Paths;
+            _session.SetRoomID(CurrentLocationId);
+            int? id = _session.GetRoomId();
+            Location = _story.locations[id.Value];
+            Paths = _story.locations[id.Value].Paths;
         }
     }
 }

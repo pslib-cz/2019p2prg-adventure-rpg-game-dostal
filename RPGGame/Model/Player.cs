@@ -2,13 +2,10 @@
 {
     public class Player : CommonStats
     {
-        private int level;
+        
+        public int Level { get; set; } = 1;
 
-        private int meleeFightingSkill;
-
-        public int Level { get { return level;} set { if (level == default) { level = 1;} } }
-
-        public int MeleeFightingSkill { get { return meleeFightingSkill; } set { if (meleeFightingSkill == default) { meleeFightingSkill = 1;} } }
+        public int MeleeFightingSkill { get; set; } = 1;
 
         public int ForcePotential { get; set; }
 

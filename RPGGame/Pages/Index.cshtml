@@ -1,38 +1,10 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Domovská stránka";
 }
 
 <div class="text-center">
     <h1 class="display-4">Hra ze Star Wars</h1>
-    <form method="get" asp-page-handler="nameCharacter">
-        <h2>Jméno postavy</h2>
-        <input asp-for="CharacterName" type="text" value="@Model.PlayerStats.Name" />
-        <button class="btn btn-primary">Zahaj hru</button>
-    </form>
-
-    @if (Model.CurrentLocationID == 1)
-    {
-        @do
-        {
-            <h2>@Model.CurrentLocation.NameOfPlace</h2>
-            <p>@Model.CurrentLocation.DescriptionOfPlace</p>
-
-            if (Model.CurrentLocationID == 0 || Model.CurrentLocationID == 20)
-            {
-                <p>Hra skončila, pokud chceš začít znovu, zadej zvovu jméno postavy a znovu zahaj hru.</p>
-                break;
-            }
-            else
-            {
-                for (int d = 0; d < Model.CurrentPaths.Count; d++)
-                {
-                    <a asp-route-userChoice="@Model.CurrentPaths[d].PathID">@Model.CurrentPaths[d].DescriptionOfChoice</a>
-                }
-            }
-        }
-        while (true);
-    }
-
+    <a style=" background-color: #f44336; color: white; padding: 15px 25px; text-align: center; text-decoration: none; display: inline-block;" asp-page="/Room" asp-page-handler="start">Zahaj hru</a>
 </div>

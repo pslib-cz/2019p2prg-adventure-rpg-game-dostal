@@ -11,7 +11,5 @@ namespace RPGGame.Model
         public string DescriptionOfPlace { get; set; }
 
         public List<Path> Paths { get; set; }
-
-        public Boss Enemy { get; set; }
     }
 }

@@ -9,7 +9,7 @@ namespace RPGGame.Services
         readonly ISession _session;
         const string PLAYERSTATS = "P.STATS";
         const string LOCATION = "LOCATIONID";
-
+    
         public Player PlayerStats { get; set; }
         
         public SessionStorage(IHttpContextAccessor hca)
@@ -32,6 +32,5 @@ namespace RPGGame.Services
         {
             _session.Set(PLAYERSTATS, stats);
         }
-       
     }
 }

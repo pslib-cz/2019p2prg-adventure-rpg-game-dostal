@@ -1,0 +1,49 @@
+﻿@page
+@model RPGGame.Pages.RoomModel
+@{
+    ViewData["Title"] = "Příběh";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Příběh</title>
+</head>
+<body>
+    <div class="text-center">
+        <ul class="text-center" style="width: 200px; list-style-type: none; border-style: solid; background-color: indianred; font-weight: bold;">
+            <li style="text-align: left"> Síla útoku: @Model.Stats.AttackStrength</li>
+            <li style="text-align: left"> Odolnost: @Model.Stats.Endurance</li>
+            <li style="text-align: left"> Potenciál v síle: @Model.Stats.ForcePotential</li>
+            <li style="text-align: left"> Zdraví: @Model.Stats.Health</li>
+            <li style="text-align: left"> Úroveň: @Model.Stats.Level</li>
+            <li style="text-align: left"> Boj na blízko: @Model.Stats.MeleeFightingSkill</li>
+            <li style="text-align: left"> Rychlost útoku: @Model.Stats.SpeedOfAttack</li>
+        </ul>
+
+        <h2>@Model.CurrentLocation.NameOfPlace</h2>
+        <p>@Model.CurrentLocation.DescriptionOfPlace</p>
+
+        @if (Model.CurrentLocation.ID == 0)
+        {
+            <p>Byl jsi bohužel zabit. Hru můžeš zkusit znova pomocí odkazu.</p>
+            <a style="margin-top: 10px" asp-page="/Index" class="btn btn-secondary">Nová hra</a>
+        }
+        else if (Model.CurrentLocation.ID == 20)
+        {
+            <p>Výborně, hru si úspěšně dohrál. Hru můžeš zkusit znova pomocí odkazu.</p>
+            <a style="margin-top: 10px" asp-page="/Index" class="btn btn-secondary">Nová hra</a>
+        }
+        else
+        {
+            @for (int d = 0; d < Model.CurrentPaths.Count; d++)
+            {
+                <a class="btn btn-secondary" style="margin-bottom: 10px" asp-route-userChoice="@Model.CurrentPaths[d].PathID">@Model.CurrentPaths[d].DescriptionOfChoice</a><br />
+            }
+        }
+    </div>
+</body>
+</html>
+
+
